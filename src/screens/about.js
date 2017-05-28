@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,11 +15,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const AboutScreen = () => (
+const AboutScreen = ({ navigation }) => (
   <View style={styles.container}>
     <Text style={styles.welcome}>
       About Screen
     </Text>
+    <Button
+      onPress={() => navigation.dispatch({ type: 'Home' })}
+      title="Home"
+    />
   </View>
 );
 

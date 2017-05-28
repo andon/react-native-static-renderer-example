@@ -7,8 +7,18 @@ import { StackNavigator, addNavigationHelpers, NavigationActions } from 'react-n
 import HomeScreen from './src/screens/home';
 import AboutScreen from './src/screens/about';
 
+import PerfMonitor from 'react-native/Libraries/Performance/RCTRenderingPerf';
+PerfMonitor.toggle();
+PerfMonitor.start();
+
 export default class App extends React.Component {
   store = createStore(reducer);
+
+  componentDidMount() {
+    setTimeout(() => {
+      PerfMonitor.stop();
+    }, 8000);
+  }
 
   render() {
     return (
@@ -44,6 +54,11 @@ function nav(state = initialState, action) {
     case 'About':
       nextState = AppWithStackNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'About' })
+      );
+      break;
+    case 'Home':
+      nextState = AppWithStackNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'Home' })
       );
       break;
     default:
