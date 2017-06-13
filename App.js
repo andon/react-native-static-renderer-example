@@ -21,6 +21,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log('render: App');
     return (
       <Provider store={this.store}>
         <ConnectedApp />
@@ -34,9 +35,13 @@ const AppWithStackNavigator = StackNavigator({
   About: { screen: AboutScreen }
 });
 
-const AppWithNavState = ({ dispatch, nav }) => (
-  <AppWithStackNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
-);
+class AppWithNavState extends React.Component {
+  render() {
+    console.log('render: AppWithNavState');
+    const { dispatch, nav } = this.props;
+    return <AppWithStackNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />;
+  }
+}
 
 const mapStateToProps = state => ({
   nav: state.nav
